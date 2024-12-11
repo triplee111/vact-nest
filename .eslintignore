@@ -1,0 +1,10 @@
+config/
+dist/
+node_modules
+assets
+_assets
+*.json
+*.pug
+*.lock
+*.md
+vue.config.js

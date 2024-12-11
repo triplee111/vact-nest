@@ -1,0 +1,42 @@
+{
+  "ub": {
+    "staging": {
+      "public": "//251e.bcad8.com/actions/act_evt/web_file/assets/",
+      "upload": "//251e.bcad8.com/actions/act_evt/web_file/upload/"
+    },
+    "official": {
+      "public": "//files.ub727.com/assets/",
+      "upload": "//files.ub727.com/upload/ub/"
+    }
+  },
+  "dbcn": {
+    "staging": {
+      "public": "//251e.bcad8.com/actions/act_evt/web_file/assets/",
+      "upload": "//251e.bcad8.com/actions/act_evt/web_file/upload/"
+    },
+    "official": {
+      "public": "//files.w2bonus.com/assets/",
+      "upload": "//files.w2bonus.com/upload/dbcn/"
+    }
+  },
+  "dbvn": {
+    "staging": {
+      "public": "//251e.bcad8.com/actions/act_evt/web_file/assets/",
+      "upload": "//251e.bcad8.com/actions/act_evt/web_file/upload/"
+    },
+    "official": {
+      "public": "//files.w2bonus.com/assets/",
+      "upload": "//files.w2bonus.com/upload/dbvn/"
+    }
+  },
+  "rollbet": {
+    "staging": {
+      "public": "//251e.bcad8.com/actions/act_evt/web_file/assets/",
+      "upload": "//251e.bcad8.com/actions/act_evt/web_file/upload/"
+    },
+    "official": {
+      "public": "//files.rollingbet.com/assets/",
+      "upload": "//files.rollingbet.com/upload/rollbet/"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+- name: Rocket chat api operation
+  hosts: localhost
+  connection: local
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  gather_facts: no
+
+  tasks:
+    - name: Send bot notification to group
+      uri:
+        url: https://rk.ark00.com/api/v1/chat.postMessage
+        method: POST
+        headers:
+          Content-Type: application/json
+          X-Auth-Token: "{{ auth_token }}"
+          X-User-Id: "{{ user_id }}"
+        body:
+          {
+            "roomId": "Wd3LJahhYPvB2oMzB",
+            "alias": "活動開發BOT",
+            "text": "{{ message }}",
+          }
+        body_format: json
+        return_content: yes

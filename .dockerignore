@@ -1,0 +1,13 @@
+**/.git
+**/.DS_Store
+**/node_modules
+**/ansible
+*.log
+Dockerfile*
+docker-compose*
+.dockerignore
+.git
+.gitignore
+.vscode
+.drone.yml
+README.md

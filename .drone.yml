@@ -1,0 +1,79 @@
+anchors:
+  - &registry_config
+    registry: registry.gitlab-ce.cyadmk.com:5000
+    repo: registry.gitlab-ce.cyadmk.com:5000/${CI_REPO_NAME}
+    cache_from: registry.gitlab-ce.cyadmk.com:5000/${CI_REPO_NAME}:latest
+
+kind: pipeline
+type: docker
+name: image_build
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+  - name: tag release
+    image: plugins/docker
+    settings:
+      <<: *registry_config
+
+      auto_tag: true
+      username:
+        from_secret: GITLAB_USER
+      password:
+        from_secret: GITLAB_TOKEN
+      insecure: true
+    when:
+      event:
+        - tag
+      ref:
+        - refs/tags/[0-9]*.[0-9]*[0-9]
+
+  # - name: rocketchat notify
+  #   image: sysevt/ansible:2.9
+  #   environment:
+  #     <<: *registry_config
+
+  #     USER_ID:
+  #       from_secret: RC_USER_ID
+  #     AUTH_TOKEN:
+  #       from_secret: RC_AUTH_TOKEN
+  #   commands:
+  #     - cd ansible/playbook
+  #     - >
+  #       ansible-playbook notify.rocketchat.yml
+  #       --extra-vars " \
+  #       user_id=$USER_ID \
+  #       auth_token=$AUTH_TOKEN \
+  #       message='$DRONE_REPO_NAME:$DRONE_TAG 已釋出，可執行 docker pull $${repo}:${DRONE_TAG:0:3} 進行更新'"
+  #   when:
+  #     event:
+  #       - tag
+  #     ref:
+  #       - refs/tags/[0-9]*.[0-9]*[0-9]
+  #   depends_on:
+  #     - tag release
+
+  - name: push release
+    image: plugins/docker
+    settings:
+      <<: *registry_config
+
+      tags: latest
+      username:
+        from_secret: GITLAB_USER
+      password:
+        from_secret: GITLAB_TOKEN
+      insecure: true
+    when:
+      branch:
+        - master
+      event:
+        - push
+
+trigger:
+  event:
+    include:
+      - push
+      - tag
